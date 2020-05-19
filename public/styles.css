@@ -2,9 +2,8 @@
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
-h3 a {
-  color: white;
-  text-decoration: none;
+a {
+  text-decoration: none !important ;
 }
 
 .error {

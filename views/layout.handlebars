@@ -31,22 +31,38 @@
 
 </head>
 
-<body class="container-fluid border border-danger">
-  <header class="row bg-primary py-5">
+<body>
+  <header class="row bg-primary p-5">
 
-    <div class="border border-danger col-md-4">
-      <h3><a href="/">Dashboard</a></h3>
+    <div class="col-md-6">
+      <h1 ><a class="text-white" href="/">Dashboard</a></h1>
     </div>
 
-    <div id="spinner" class="mdl-spinner mdl-js-spinner"></div>
     <!-- TODO: Add Google Sign-in button -->
 
-    <div id="profile" class="col-md-6 border border-danger">
-      <b class="name"></b><br />
-      <i class="email"></i>
+    <div id="profile" class="col-md-6">
+      <div class="row">
+        <div class="col-md-2">
+          <div id="spinner" class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+        <div class="col-md-4 text-white ">
+          <b class="name"></b><br />
+          <i class="email"></i>
+        </div>
+
+        <div class="col-md-4 g-signin2" data-onsuccess="onSignIn"></div>
+      </div>
+
+
+
+
+
+
     </div>
 
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
   </header>
 
