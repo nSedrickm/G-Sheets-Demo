@@ -1,73 +1,66 @@
-
-<div class="mdl-grid">
-  <section id="orders" class="mdl-cell mdl-cell--8-col relative">
-    <div class="mdl-grid">
+<div class="row">
+  <div id="orders" class="col-md-8">
+    <div class="row ">
       {{#each orders}}
-      <div class="mdl-cell mdl-cell--6-col mdl-card mdl-shadow--2dp">
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Order #{{id}}</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          <table class="order-details">
-            <tr>
-              <th>Customer</th>
-              <td>{{customerName}}</td>
-            </tr>
-            <tr>
-              <th>Product code</th>
-              <td>{{productCode}}</td>
-            </tr>
-            <tr>
-              <th>Units ordered</th>
-              <td>{{unitsOrdered}}</td>
-            </tr>
-            <tr>
-              <th>Unit price (USD)</th>
-              <td>{{unitPrice}}</td>
-            </tr>
-            <tr>
-              <th>Status</th>
-              <td>{{status}}</td>
-            </tr>
-          </table>
-        </div>
-        <div class="mdl-card__actions">
-          <a class="mdl-button mdl-button--colored mdl-js-button
-                    mdl-js-ripple-effect" href="/edit/{{id}}">Edit</a>
-          <a class="mdl-button mdl-js-button mdl-js-ripple-effect" href="/delete/{{id}}">Delete</a>
+      <div class="col-md-6">
+        <div class="card bg-white shadow mb-3">
+          <div class="card-header">Client #{{id}}</div>
+          <div class="card-body">
+            <table class="table table-sm table-borderless">
+              <tr>
+                <th>Customer</th>
+                <td>{{customerName}}</td>
+              </tr>
+              <tr>
+                <th>Product code</th>
+                <td>{{productCode}}</td>
+              </tr>
+              <tr>
+                <th>Units ordered</th>
+                <td>{{unitsOrdered}}</td>
+              </tr>
+              <tr>
+                <th>Unit price (USD)</th>
+                <td>{{unitPrice}}</td>
+              </tr>
+              <tr>
+                <th>Status</th>
+                <td>{{status}}</td>
+              </tr>
+            </table>
+            <a class="btn btn-secondary" href="/edit/{{id}}">Edit</a>
+            <a class="btn btn-danger" href="/delete/{{id}}">Delete</a>
+          </div>
         </div>
       </div>
       {{/each}}
-      <a class="btn btn-danger mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect
-                 mdl-button--colored mdl-shadow--4dp mdl-color--accent" href="/create">
-        <i class="material-icons" role="presentation">add</i>
-        <span class="visuallyhidden">Add</span>
-      </a>
     </div>
-  </section>
+
+    <a class="btn btn-primary d-block w-50 mx-auto" href="/create">Add</a>
+  </div>
 
   <!-- TODO: Show spreadsheets -->
-  <section id="spreadsheets" class="mdl-cell mdl-cell--4-col relative">
-    <div class="mdl-list">
-      <div class="mdl-list__item">
-        <span class="mdl-list__item-primary-content mdl-layout-title">
-          Spreadsheets</span>
-        <span class="mdl-list__item-secondary-action">
-          <button class="mdl-button mdl-js-button mdl-button--raised
-                       mdl-js-ripple-effect mdl-button--colored" rel="create" type="button">Create</button>
-        </span>
-      </div>
+  <div id="spreadsheets" class="col-md-4">
+    <dl class="row mb-3">
+      <dt class="col-sm-6">
+        <h3 class="text-primary mb-2">Spreadsheets</h3>
+      </dt>
+      <dd class="col-sm-6">
+        <button class="btn btn-success d-block w-50 mx-auto" rel="create" type="button">New</button>
+      </dd>
+    </dl>
+
+    <dl class="row">
       {{#each spreadsheets}}
-      <div class="mdl-list__item">
-        <a class="mdl-list__item-primary-content" href="https://docs.google.com/spreadsheets/d/{{id}}/edit"
-          target="_blank">{{name}}</a>
-        <span class="mdl-list__item-secondary-action">
-          <button class="mdl-button mdl-js-button mdl-button--raised
-                       mdl-js-ripple-effect" rel="sync" data-spreadsheetid="{{id}}" type="button">Sync</button>
-        </span>
-      </div>
+
+      <dt class="col-sm-6"><a href="https://docs.google.com/spreadsheets/d/{{id}}/edit" target="_blank">{{name}}</a>
+      </dt>
+      <dd class="col-sm-6"><button class="btn btn-warning d-block w-50 mx-auto" rel="sync" data-spreadsheetid="{{id}}"
+          type="button">Sync</button></dd>
+
       {{/each}}
-    </div>
-  </section>
+    </dl>
+  </div>
+</div>
 
 </div>
