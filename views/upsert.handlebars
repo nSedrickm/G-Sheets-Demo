@@ -1,43 +1,33 @@
+<h2>Order details</h2>
 
-<section class="mdl-grid">
-  <div class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp">
-    <div class="mdl-card__title">
-      <h2 class="mdl-card__title-text">Client details</h2>
+<form class="form my-4" method="post" action="/upsert">
+  {{#if order}}
+  <input type="hidden" name="id" value="{{order.id}}" />
+  {{/if}}
+
+  <div class="form-group row">
+    <label class="col-sm-2" for="name">Client Name</label>
+    <div class="col-sm-4">
+      <input class="form-control" type="text" name="name" value="{{order.name}}">
     </div>
-    <form method="post" action="/upsert">
-      {{#if client}}
-      <input type="hidden" name="id" value="{{client.id}}" />
-      {{/if}}
-      <div class="mdl-card__supporting-text">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
-          <input class="mdl-textfield__input" type="text" name="clientName" value="{{client.clientName}}">
-          <label class="mdl-textfield__label" for="sample1">Name...</label>
-        </div>
-
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
-          <input class="mdl-textfield__input" type="text" name="clientTel" id="clientTel" value="{{client.clientTel}}">
-          <label class="mdl-textfield__label" for="sample1">Telephone...</label>
-        </div>
-
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
-          <input class="mdl-textfield__input" type="text" name="clientAddress" value="{{client.clientAddress}}">
-          <label class="mdl-textfield__label" for="sample1">Address...</label>
-        </div>
-
-        {{#if client}}
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
-          <input class="mdl-textfield__input" type="text" pattern="PENDING|SHIPPED|DELIVERED" name="status" value="{{client.status}}">
-          <label class="mdl-textfield__label" for="sample1">Status...</label>
-          <span class="mdl-textfield__error">Must be one of PENDING, SHIPPED, or DELIVERED</span>
-        </div>
-        {{/if}}
-      </div>
-      <div class="mdl-card__actions">
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised">
-          {{#if client}}Save{{else}}Create{{/if}}
-        </button>
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect" href="/">Cancel</a>
-      </div>
-    </form>
   </div>
-</section>
+
+  <div class="form-group row">
+    <label class="col-sm-2" for="token">token</label>
+    <div class="col-sm-4">
+      <input class="form-control" type="text" name="token" id="token" value="{{order.token}}">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2" for="name">date</label>
+    <div class="col-sm-4">
+      <input class="form-control" type="date"  name="date" value="{{order.date}}">
+    </div>
+  </div>
+
+  <button class="btn btn-primary">
+    {{#if order}}Save{{else}}Create{{/if}}
+  </button>
+  <a class="btn btn-danger" href="/">Cancel</a>
+</form>
