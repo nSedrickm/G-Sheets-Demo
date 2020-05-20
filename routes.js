@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
   };
   Sequelize.Promise.all([
     models.Client.findAll(options),
-    //models.Spreadsheet.findAll(options)
+    models.Spreadsheet.findAll(options)
   ]).then(function (results) {
     /* debug line for clients in db
      console.log(results[0]); */
