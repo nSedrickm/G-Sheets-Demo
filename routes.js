@@ -14,14 +14,14 @@ router.get('/', function (req, res, next) {
   };
   Sequelize.Promise.all([
     models.Client.findAll(options),
+<<<<<<< HEAD
     models.Spreadsheet.findAll(options)
+=======
+    //models.Spreadsheet.findAll(options)
+>>>>>>> displaying clients info from db
   ]).then(function (results) {
-    console.log("harvesting datavalues");
-    results[0].forEach(
-      (Client) => {
-        console.log(Client.dataValues);
-      }
-    );
+    /* debug line for clients in db
+     console.log(results[0]); */
     res.render('index', {
       clients: results[0],
       spreadsheets: results[1]
