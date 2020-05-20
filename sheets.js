@@ -104,10 +104,9 @@ SheetsHelper.prototype.sync = function (spreadsheetId, sheetId, orders, callback
 
 var COLUMNS = [
     { field: 'id', header: 'ID' },
-    { field: 'clientName', header: 'Client Name' },
-    { field: 'clientTel', header: 'Telephone' },
-    { field: 'clientAddress', header: 'Address' },
-    { field: 'status', header: 'Status' }
+    { field: 'name', header: 'Client Name' },
+    { field: 'token', header: 'Token' },
+    { field: 'date', header: 'Date' }
 ];
 
 function buildHeaderRowRequest(sheetId) {

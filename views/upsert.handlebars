@@ -1,33 +1,33 @@
 <h2>Order details</h2>
 
 <form class="form my-4" method="post" action="/upsert">
-  {{#if order}}
-  <input type="hidden" name="id" value="{{order.id}}" />
+  {{#if client}}
+  <input type="hidden" name="id" value="{{client.id}}" />
   {{/if}}
 
   <div class="form-group row">
     <label class="col-sm-2" for="name">Client Name</label>
     <div class="col-sm-4">
-      <input class="form-control" type="text" name="name" value="{{order.name}}">
+      <input class="form-control" type="text" name="name" value="{{client.name}}">
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-sm-2" for="token">token</label>
     <div class="col-sm-4">
-      <input class="form-control" type="text" name="token" id="token" value="{{order.token}}">
+      <input class="form-control" type="text" name="token" id="token" value="{{client.token}}">
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-sm-2" for="name">date</label>
     <div class="col-sm-4">
-      <input class="form-control" type="date"  name="date" value="{{order.date}}">
+      <input class="form-control" type="date"  name="date" value="{{client.date}}">
     </div>
   </div>
 
   <button class="btn btn-primary">
-    {{#if order}}Save{{else}}Create{{/if}}
+    {{#if client}}Save{{else}}Create{{/if}}
   </button>
   <a class="btn btn-danger" href="/">Cancel</a>
 </form>
