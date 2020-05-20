@@ -1,27 +1,23 @@
 <div class="row">
-  <div id="orders" class="col-md-8">
+  <div id="clients" class="col-md-8">
     <div class="row ">
-      {{#each orders}}
+      {{#each clients}}
       <div class="col-md-6">
         <div class="card bg-white shadow mb-3">
           <div class="card-header">Client #{{id}}</div>
           <div class="card-body">
             <table class="table table-sm table-borderless">
               <tr>
-                <th>Customer</th>
-                <td>{{customerName}}</td>
+                <th>Name</th>
+                <td>{{clientName}}</td>
               </tr>
               <tr>
-                <th>Product code</th>
-                <td>{{productCode}}</td>
+                <th>Telephone</th>
+                <td>{{clientTel}}</td>
               </tr>
               <tr>
-                <th>Units ordered</th>
-                <td>{{unitsOrdered}}</td>
-              </tr>
-              <tr>
-                <th>Unit price (USD)</th>
-                <td>{{unitPrice}}</td>
+                <th>Addess</th>
+                <td>{{clientAddress}}</td>
               </tr>
               <tr>
                 <th>Status</th>

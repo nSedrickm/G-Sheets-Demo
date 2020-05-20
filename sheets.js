@@ -72,7 +72,7 @@ SheetsHelper.prototype.createSpreadsheet = function (title, callback) {
     });
 };
 
-SheetsHelper.prototype.sync = function (spreadsheetId, sheetId, orders, callback) {
+SheetsHelper.prototype.sync = function (spreadsheetId, sheetId, clients, callback) {
     var requests = [];
     // Resize the sheet.
     requests.push({
@@ -80,7 +80,7 @@ SheetsHelper.prototype.sync = function (spreadsheetId, sheetId, orders, callback
             properties: {
                 sheetId: sheetId,
                 gridProperties: {
-                    rowCount: orders.length + 1,
+                    rowCount: clients.length + 1,
                     columnCount: COLUMNS.length
                 }
             },
@@ -95,7 +95,7 @@ SheetsHelper.prototype.sync = function (spreadsheetId, sheetId, orders, callback
                 rowIndex: 1,
                 columnIndex: 0
             },
-            rows: buildRowsForOrders(orders),
+            rows: buildRowsForClients(clients),
             fields: '*'
         }
     });
@@ -116,10 +116,9 @@ SheetsHelper.prototype.sync = function (spreadsheetId, sheetId, orders, callback
 
 var COLUMNS = [
     { field: 'id', header: 'ID' },
-    { field: 'customerName', header: 'Customer Name' },
-    { field: 'productCode', header: 'Product Code' },
-    { field: 'unitsOrdered', header: 'Units Ordered' },
-    { field: 'unitPrice', header: 'Unit Price' },
+    { field: 'clientName', header: 'Client Name' },
+    { field: 'clientTel', header: 'Client Tel' },
+    { field: 'clientAddress', header: 'Client Address' },
     { field: 'status', header: 'Status' }
 ];
 
@@ -153,40 +152,14 @@ function buildHeaderRowRequest(sheetId) {
     };
 }
 
-function buildRowsForOrders(orders) {
-    return orders.map(function (order) {
+function buildRowsForClients(clients) {
+    return clients.map(function (client) {
         var cells = COLUMNS.map(function (column) {
             switch (column.field) {
-                case 'unitsOrdered':
-                    return {
-                        userEnteredValue: {
-                            numberValue: order.unitsOrdered
-                        },
-                        userEnteredFormat: {
-                            numberFormat: {
-                                type: 'NUMBER',
-                                pattern: '#,##0'
-                            }
-                        }
-                    };
-                    break;
-                case 'unitPrice':
-                    return {
-                        userEnteredValue: {
-                            numberValue: order.unitPrice
-                        },
-                        userEnteredFormat: {
-                            numberFormat: {
-                                type: 'CURRENCY',
-                                pattern: '"$"#,##0.00'
-                            }
-                        }
-                    };
-                    break;
                 case 'status':
                     return {
                         userEnteredValue: {
-                            stringValue: order.status
+                            stringValue: client.status
                         },
                         dataValidation: {
                             condition: {
@@ -205,7 +178,7 @@ function buildRowsForOrders(orders) {
                 default:
                     return {
                         userEnteredValue: {
-                            stringValue: order[column.field].toString()
+                            stringValue: client[column.field].toString()
                         }
                     };
             }

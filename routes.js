@@ -27,15 +27,15 @@ var Sequelize = require('sequelize');
 // TODO: Show spreadsheets on the main page.
 router.get('/', function (req, res, next) {
   var options = {
-    order: [['createdAt', 'DESC']],
+    client: [['createdAt', 'DESC']],
     raw: true
   };
   Sequelize.Promise.all([
-    models.Order.findAll(options),
+    models.Client.findAll(options),
     models.Spreadsheet.findAll(options)
   ]).then(function (results) {
     res.render('index', {
-      orders: results[0],
+      clients: results[0],
       spreadsheets: results[1]
     });
   });
@@ -46,24 +46,24 @@ router.get('/create', function (req, res, next) {
 });
 
 router.get('/edit/:id', function (req, res, next) {
-  models.Order.findByPk(req.params.id).then(function (order) {
-    if (order) {
+  models.Client.findByPk(req.params.id).then(function (client) {
+    if (client) {
       res.render('upsert', {
-        order: order.toJSON()
+        client: client.toJSON()
       });
     } else {
-      next(new Error('Order not found: ' + req.params.id));
+      next(new Error('Client not found: ' + req.params.id));
     }
   });
 });
 
 router.get('/delete/:id', function (req, res, next) {
-  models.Order.findByPk(req.params.id)
-    .then(function (order) {
-      if (!order) {
-        throw new Error('Order not found: ' + req.params.id);
+  models.Client.findByPk(req.params.id)
+    .then(function (client) {
+      if (!client) {
+        throw new Error('Client not found: ' + req.params.id);
       }
-      return order.destroy();
+      return client.destroy();
     })
     .then(function () {
       res.redirect('/');
@@ -73,7 +73,7 @@ router.get('/delete/:id', function (req, res, next) {
 });
 
 router.post('/upsert', function (req, res, next) {
-  models.Order.upsert(req.body).then(function () {
+  models.Client.upsert(req.body).then(function () {
     res.redirect('/');
   }, function (err) {
     next(err);
@@ -90,7 +90,7 @@ router.post('/spreadsheets', function (req, res, next) {
   }
   var accessToken = auth.split(' ')[1];
   var helper = new SheetsHelper(accessToken);
-  var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
+  var title = 'Clients (' + new Date().toLocaleTimeString() + ')';
   helper.createSpreadsheet(title, function (err, spreadsheet) {
     if (err) {
       return next(err);
@@ -117,15 +117,15 @@ router.post('/spreadsheets/:id/sync', function (req, res, next) {
   var helper = new SheetsHelper(accessToken);
   Sequelize.Promise.all([
     models.Spreadsheet.findByPk(req.params.id),
-    models.Order.findAll()
+    models.Client.findAll()
   ]).then(function (results) {
     var spreadsheet = results[0];
-    var orders = results[1];
-    helper.sync(spreadsheet.id, spreadsheet.sheetId, orders, function (err) {
+    var clients = results[1];
+    helper.sync(spreadsheet.id, spreadsheet.sheetId, clients, function (err) {
       if (err) {
         return next(err);
       }
-      return res.json(orders.length);
+      return res.json(clients.length);
     });
   });
 });
