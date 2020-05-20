@@ -20,13 +20,12 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var Order = sequelize.define('Order', {
-    customerName: {type: DataTypes.STRING, allowNull: false},
-    productCode: {type: DataTypes.STRING, allowNull: false},
-    unitsOrdered: {type: DataTypes.INTEGER, allowNull: false},
-    unitPrice: {type: DataTypes.FLOAT, allowNull: false},
+  var Client = sequelize.define('Client', {
+    clientName: {type: DataTypes.STRING, allowNull: false},
+    clientTel: {type: DataTypes.STRING, allowNull: false},
+    clientAddress: {type: DataTypes.STRING, allowNull: false},
     status: {type: DataTypes.STRING, allowNull: false, defaultValue: 'PENDING'}
   });
 
-  return Order;
+  return Client;
 };
