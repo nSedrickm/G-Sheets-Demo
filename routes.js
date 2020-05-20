@@ -16,7 +16,12 @@ router.get('/', function (req, res, next) {
     models.Client.findAll(options),
     models.Spreadsheet.findAll(options)
   ]).then(function (results) {
-    console.log(results);
+    console.log("harvesting datavalues");
+    results[0].forEach(
+      (Client) => {
+        console.log(Client.dataValues);
+      }
+    );
     res.render('index', {
       clients: results[0],
       spreadsheets: results[1]
