@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
   Copyright 2016 Google, Inc.
 
@@ -29,3 +30,17 @@ module.exports = function(sequelize, DataTypes) {
 
   return Client;
 };
+=======
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const Client = sequelize.define('Client', {
+    name: DataTypes.STRING,
+    token: DataTypes.STRING,
+    date: DataTypes.STRING
+  }, {});
+  Client.associate = function(models) {
+    // associations can be defined here
+  };
+  return Client;
+};
+>>>>>>> sequelize new models
