@@ -8,7 +8,7 @@
   },
   "repository": "https://github.com/googlecodelabs/sheets-api",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.3",
