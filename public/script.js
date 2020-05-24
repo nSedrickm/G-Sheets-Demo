@@ -1,7 +1,8 @@
 
 // Bind handlers when the page loads.
-$(function() {
-  $('.g-signin2').click(function() {
+
+$(function () {
+  $('.g-signin2').click(function () {
     $('#spinner').removeClass('d-none');
   });
 });
@@ -10,16 +11,20 @@ $(function() {
 function showError(error) {
   console.log(error);
   var alert_box = $('.alert');
-  alert_box.addClass('alert-danger');
+  alert_box.toggleClass('alert-danger d-none');
   $(".message").text(error);
-
+  setTimeout(function () {
+    alert_box.toggleClass('alert-danger d-none');
+  }, 3000);
 }
 
 function showMessage(message) {
   var alert_box = $('.alert');
-  alert_box.removeClass('alert-danger');
-  alert_box.addClass('alert-success');
+  alert_box.toggleClass('alert-success d-none');
   $(".message").text(message);
+  setTimeout(function () {
+    alert_box.toggleClass('alert-success d-none');
+  }, 3000);
 }
 
 // TODO: Add Google Sign-in.
@@ -31,17 +36,17 @@ function onSignIn(user) {
 }
 
 // TODO: Add spreadsheet control handlers.
-$(function() {
-  $('button[rel="create"]').click(function() {
-    makeRequest('POST', '/spreadsheets', function(err, spreadsheet) {
+$(function () {
+  $('button[rel="create"]').click(function () {
+    makeRequest('POST', '/spreadsheets', function (err, spreadsheet) {
       if (err) return showError(err);
       window.location.reload();
     });
   });
-  $('button[rel="sync"]').click(function() {
+  $('button[rel="sync"]').click(function () {
     var spreadsheetId = $(this).data('spreadsheetid');
     var url = '/spreadsheets/' + spreadsheetId + '/sync';
-    makeRequest('POST', url, function(err) {
+    makeRequest('POST', url, function (err) {
       if (err) return showError(err);
       showMessage('Sync complete.');
     });
@@ -60,11 +65,11 @@ function makeRequest(method, url, callback) {
     headers: {
       'Authorization': 'Bearer ' + accessToken
     },
-    success: function(response) {
+    success: function (response) {
       $('#spinner').addClass('d-none');
       return callback(null, response);
     },
-    error: function(response) {
+    error: function (response) {
       return callback(new Error(response.responseJSON.message));
     }
   });
